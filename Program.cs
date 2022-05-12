@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddDbContext<MvcMovieContext>(options =>
 //     options.UseSqlite(builder.Configuration.GetConnectionString("MvcMovieContext")));
 
+// AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 builder.Services.AddDbContext<MvcMovieContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("MvcMovieContext")));
 
@@ -26,8 +28,6 @@ using (var scope = app.Services.CreateScope())
 app.UseStaticFiles();
 
 app.UseRouting();
-
-// app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
