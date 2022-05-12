@@ -20,7 +20,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 ```
 5. Create a secret with the connection string:
 ```bash
-ConnectionStrings__MvcMovieContext="Host=10.100.0.2;Database=movie;Username=postgres;Password=/nKOd?47Sb)p6SC7"
+ConnectionStrings__MvcMovieContext="Host=10.100.0.2;Database=movie;Username=postgres;Password=xxxx"
 ```
 
 Notes:
