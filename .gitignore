@@ -31,4 +31,6 @@ yarn-error.log*
 # built files
 **/obj
 **/bin
-**/wwwroot
+
+**/Migrations/
+MvcMovie.db
