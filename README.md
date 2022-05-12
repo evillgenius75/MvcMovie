@@ -20,7 +20,7 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-Run with:
+Run locally with:
 ```bash
-dotnet run --urls http://+:5000
+ASPNETCORE_ENVIRONMENT=Development dotnet run --urls http://+:5000
 ```
