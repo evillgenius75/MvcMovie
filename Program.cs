@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MvcMovie.Data;
 using MvcMovie.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Services.AddDbContext<MvcMovieContext>(options =>
-//     options.UseSqlite(builder.Configuration.GetConnectionString("MvcMovieContext")));
+string connectionString = 
+    builder.Configuration.GetConnectionString("MvcMovieContext");
 
-// AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+if (builder.Environment.IsDevelopment())
+    builder.Services.AddDbContext<MvcMovieContext>(options =>
+        options.UseSqlite(connectionString));
+else 
+    builder.Services.AddDbContext<MvcMovieContext>(options =>
+        options.UseNpgsql(connectionString));
 
-builder.Services.AddDbContext<MvcMovieContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("MvcMovieContext")));
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
