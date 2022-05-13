@@ -8,11 +8,15 @@ string connectionString =
     builder.Configuration.GetConnectionString("MvcMovieContext");
 
 if (builder.Environment.IsDevelopment())
+{
     builder.Services.AddDbContext<MvcMovieContext>(options =>
         options.UseSqlite(connectionString));
+}
 else 
+{
     builder.Services.AddDbContext<MvcMovieContext>(options =>
         options.UseNpgsql(connectionString));
+}
 
 builder.Services.AddControllersWithViews();
 
