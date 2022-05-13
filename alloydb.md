@@ -36,3 +36,18 @@ https://www.strathweb.com/2019/12/runtime-host-configuration-options-and-appcont
     <RuntimeHostConfigurationOption Include="Npgsql.EnableLegacyTimestampBehavior" Value="true" />
   </ItemGroup>
 ```
+
+```bash
+PROJECT_ID=`gcloud config list --format 'value(core.project)' 2>/dev/null`
+VPC_CONNECTOR=vpc-connector
+
+gcloud beta run deploy \
+--region us-central1 \
+--platform managed \
+--allow-unauthenticated \
+--set-secrets="ConnectionStrings__MvcMovieContext=ConnectionStrings__MvcMovieContext:latest" \
+--service-account="eventssample-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+--vpc-connector $VPC_CONNECTOR \
+--source . \
+movie
+```
