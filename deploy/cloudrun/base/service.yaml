@@ -1,0 +1,36 @@
+aapiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: SERVICE_NAME
+  namespace: PROJECT_NUMBER
+  labels:
+    cloud.googleapis.com/location: REGION
+  annotations:
+    run.googleapis.com/description: DESCRIPTION
+spec:
+  template:
+    metadata:
+      name: REVISION_NAME
+      annotations:
+        autoscaling.knative.dev/minScale: MIN_INSTANCES
+        autoscaling.knative.dev/maxScale: MAX_INSTANCES
+        run.googleapis.com/vpc-access-connector: SERVERLESS_VPC_CONNECTOR
+    spec:
+      containerConcurrency: MAX_CONCURRENCY
+      serviceAccountName: SERVICE_ACCOUNT_EMAIL
+      containers:
+      - image: IMAGE
+        name: CONTAINER_NAME
+        ports:
+        - name: HTTP1_OR_H2C
+          containerPort: PORT
+        env:
+        - name: KEY
+          value: VALUE
+        resources:
+          limits:
+            cpu: CPU_LIMIT
+            memory: MEMORY_LIMIT
+  traffic:
+  - percent: PERCENT_TO_LATEST
+    latestRevision: true

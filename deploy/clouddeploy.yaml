@@ -1,0 +1,40 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+ name: cloud-run-pipeline
+description: application deployment pipeline
+serialPipeline:
+ stages:
+ - targetId: cr-dev-env
+   profiles: [cr-dev]
+ - targetId: cr-qa-env
+   profiles: [cr-qa]
+ - targetId: cr-prod-env
+   profiles: [cr-prod]
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: cr-dev-env
+description: Cloud Run development service
+run:
+ location: projects/sw-delivery-demo/locations/us-west1
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: cr-qa-env
+description: Cloud Run QA service
+run:
+ location: projects/sw-delivery-demo/locations/us-central1
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: cr-prod-env
+description: Cloud Run PROD service
+run:
+ location: projects/sw-delivery-demo/locations/us-south1
